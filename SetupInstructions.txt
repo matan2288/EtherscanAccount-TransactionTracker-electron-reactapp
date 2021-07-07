@@ -1,0 +1,11 @@
+1.Download/Git clone the project from github.
+2.Navigate into the electron-gk8-reactapp folder Install the dependencies trough the terminal via the command npm install.
+3.While on the terminal again , Run the command   npm run electron-react   to launch the app via electron.
+4.A few valid ethereum users to copy to the app user searchbar are displayed here for your convenience:
+-6ef4e01cc48d09605984df68d049ff64e325ddfd
+-7a250d5630b4cf539739df2c5dacb4c659f2488d
+-01f89d5b168b519b37c06c713b15c4c9e398754f
+-94235659cf8b805b2c658f9ea2d6d6ddbb17c8d7
+-0xddfabcdc4d8ffc6d5beaf154f18b778f892a0740
+Also a Demo Video is avaliable!
+4.Enjoy!

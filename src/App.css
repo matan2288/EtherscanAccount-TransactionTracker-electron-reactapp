@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+  margin: auto;
+
+  }
+
+.instructions{
+  font-size: 20px;
+
+}
+
+.please-note{
+  font-size: 15px;
+
+}
+.table{
+  max-width: 80%;
+  margin: auto;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(209, 209, 209, 1) 100%
+  );
+
+}
+
+img{
+  height: 300px;
+}
+
+
+
+.top-content-child2{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  line-height: 30px;
+}
+
+
+
+

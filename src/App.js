@@ -1,7 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import Table from "react-bootstrap/Table";
 import * as ReactBootStrap from "react-bootstrap";
@@ -15,10 +14,6 @@ function App() {
   const [defaultMaxTransactions, setMaxTransactions] = useState(100);
   const [loading, setLoading] = useState(false);
 
-  const nextTransactions = () => {
-    setMinTransactions(defaultMinTransactions + 100);
-    setMaxTransactions(defaultMaxTransactions + 100);
-  };
   const refreshTable = () => {
     setMinTransactions(0);
     setMaxTransactions(100);
@@ -31,7 +26,15 @@ function App() {
     setTxnHash(searchAccountInputRef.current.value);
     setLoading(false);
   };
-  const evokeTransactionsFilterBtn = () => {
+
+  const nextTransactions = (e) => {
+    e.preventDefault();
+    setMinTransactions(defaultMinTransactions + 100);
+    setMaxTransactions(defaultMaxTransactions + 100);
+  };
+
+  const evokeAddingTransactionsBtn = (e) => {
+    e.preventDefault();
     // console.log(toMaxTransactions.current.value);
     setMaxTransactions(toMaxTransactions.current.value);
   };
@@ -41,7 +44,7 @@ function App() {
       //Offset: Query the number of records, optional. The default is to query 10000 records.
       `https://api.etherscan.io/api?module=account&action=txlist&address=${
         "0x" + txnHash
-      }&endblock=99999999&page=page&offset=10&sort=asc&apikey=154BUMQ1Y6WSQRGWFRQY3R6GTKR4P8HS6P`
+      }&endblock=99999999&page=page&offset=10&sort=ascd&apikey=154BUMQ1Y6WSQRGWFRQY3R6GTKR4P8HS6P`
     )
       .then((response) => response.json())
       .then((dataAquiredFromApi) => {
@@ -60,11 +63,18 @@ function App() {
   return (
     <div className="App">
       <div className="top-content">
+        <img
+          id="eth-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/1200px-Ethereum-icon-purple.svg.png"
+          alt="eth"
+        />
         <div className="top-content-child1">
           <img
-            src="https://download.logo.wine/logo/Ethereum/Ethereum-Logo.wine.png"
+            id="anlysis-img"
+            src="https://www.seekpng.com/png/full/335-3350546_financial-growth-analysis-icon-icon.png"
             alt="eth"
           />
+          <h1>Etherscan's Account Transaction Tracker</h1>
 
           <p className="instructions">
             Instructions:Copy and paste the BOLD Account id after the 0x to the
@@ -74,6 +84,12 @@ function App() {
           <p className="please-note">
             Please NOTE!: If the User's ID is invalid, The table wont display
             anything.
+          </p>
+          <p>
+            {" "}
+            <a href="https://etherscan.io/txs" target="_blank">
+              Fetch Account's Id's From This Link
+            </a>{" "}
           </p>
 
           <span>0x</span>
@@ -85,7 +101,9 @@ function App() {
             ref={searchAccountInputRef}
           />
 
-          <button onClick={evokeSearchBtn}>Search Account Transactions</button>
+          <button onClick={evokeSearchBtn}>
+            Search Transactions By Account ID
+          </button>
         </div>
 
         <div className="top-content-child2">
@@ -94,20 +112,18 @@ function App() {
               Show the next 100 Transactions
             </a>
             /
-            <a href="#" onClick={refreshTable}>
+            <a href="" onClick={refreshTable}>
               Refresh Table
             </a>
             <div>Pick Max Transactions To Display On Page</div>
             <span>
               <input type="number" ref={toMaxTransactions} />
             </span>
-            <button onClick={evokeTransactionsFilterBtn}>Go</button>
+            <button onClick={evokeAddingTransactionsBtn}>Go</button>
           </div>
         </div>
       </div>
-
-      {}
-      <Table className="table" striped bordered hover>
+      <Table className="table" striped bordered hover size="sm" responsive="sm">
         <thead>
           <tr>
             <th>Ascended Order</th>
@@ -129,7 +145,7 @@ function App() {
                     <td>{defaultMinTransactions + i}</td>
                     <td>{field.from}</td>
                     <td>{field.to}</td>
-                    <td>{field.value}</td>
+                    <td id="value">{field.value}</td>
                     <td>{field.timeStamp}</td>
                     <td>{field.confirmations}</td>
                     <td>{field.blockHash}</td>
